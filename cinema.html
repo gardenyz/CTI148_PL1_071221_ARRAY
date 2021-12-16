@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lugares do Cinema</title>
+    <style type="text/css">
+        .tela {
+            width: 1355px;
+            height: 50px;
+            background-color: rgb(54, 49, 49);
+            color: white;
+            text-align: center;
+        }
+    </style>
+    <script language="Javascript">
+
+        var lugares, i, x, y;
+        lugares = new Array();
+        for (i = 0; i < 15; ++i) {
+            lugares[i] = new Array(40);
+        }
+        for (x = 0; x < 15; x++) {
+            for (y = 0; y < 40; y++) {
+                lugares[x][y] = false;
+            }
+        }
+
+        function reserva(num, lin, col)
+        {
+            alert("Poltrona " + num);
+            if (lugares[lin][col])
+            {
+                alert("Este lugar já está ocupado");
+            }
+            else 
+            {
+                lugares[lin][col] = true;
+                alert("Reserva efetuada com sucesso");
+                document.getElementById("lugar" + num).setAttribute("src", "vermelho.jpeg"); f
+            }
+
+        }
+        function totReserva()
+        {
+            var x, y, lin, col;
+            x = 0;
+            y = 0;
+
+            for (lin = 0; lin < 15; lin++) 
+            {
+                for (col = 0; col < 40; col++) 
+                {
+                    if (lugares[lin][col] == true) {
+                        x++;
+                    }
+                    else {
+                        y++;
+                    }
+                }
+            }
+            alert("Leds acesos: " + ((x / 600) * 100).toFixed(2) + " % | Leds apagados: " + ((y / 600) * 100).toFixed(2) + " %");
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <table>
+        <form name="fmr">
+            <script language="Javascript">
+                var l, c, pos;
+                pos = 0;
+                for (l = 0; l < 15; l++) 
+                {
+                    document.write("<tr>");
+                    for (c = 0; c < 40; c++)
+                    {
+                        document.write("<td>");
+                        document.write("<img src ='verde.jpeg' id ='lugar" + pos + "' width='30' height='20' onclick='{reserva(" + pos + "," + l + "," + c + ")};'>");
+                        document.write("</td>");
+                        pos++;
+                    }
+                    document.write("</tr>");
+                }
+            </script>
+            <table class="tela">
+                <tr>
+                    <td> TELA</td>
+                </tr>
+            </table>
+            <center>
+                <br>
+                <input type="button" value="Ocupaçao" style="width:100px;height:50px;background-color:green"
+                    onclick="totReserva();">
+            </center>
+        </form>
+    </table>
+
+
+</body>
+
+</html>
